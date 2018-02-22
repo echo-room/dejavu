@@ -1,5 +1,6 @@
 import warnings
 import json
+import sys
 warnings.filterwarnings("ignore")
 
 from dejavu import Dejavu
@@ -15,12 +16,14 @@ if __name__ == '__main__':
 	djv = Dejavu(config)
 
 	# Recognize audio from file
-	song = djv.recognize(FileRecognizer, "wav/hello/test.wav")
+	client = sys.argv[1]
+	filename = sys.argv[2]
+	path = "wav/" + client + "/" + filename + ".wav"
+	song = djv.recognize(FileRecognizer, path)
+	print song
 	print "From file we recognized: %s\n" % song
 	# if match => get existing room
 	# else => give new room
 	# Fingerprints audio and adds to database, with room id
-	djv.fingerprint_directory("wav/hello", [".wav"])
+	# djv.fingerprint_directory("wav/hello", [".wav"])
 	# Delete file and directory
-
-
