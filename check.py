@@ -20,10 +20,13 @@ if __name__ == '__main__':
 	filename = sys.argv[2]
 	path = "wav/" + client + "/" + filename + ".wav"
 	song = djv.recognize(FileRecognizer, path)
-	print song
-	print "From file we recognized: %s\n" % song
-	# if match => get existing room
-	# else => give new room
+	if not song:
+			# if match => get existing room
+			print 'We need to make a new room number.'
+	else:
+		# else => give new room
+		print "From file we recognized: %s\n" % song
+
 	# Fingerprints audio and adds to database, with room id
 	# djv.fingerprint_directory("wav/hello", [".wav"])
 	# Delete file and directory
